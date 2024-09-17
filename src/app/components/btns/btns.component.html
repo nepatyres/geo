@@ -1,0 +1,75 @@
+<div class="flex flex-row absolute top-[21px] right-[27px] z-20">
+    <button id="login-btn"
+        class="flex justify-center h-[45px] w-[45px] bg-transparent rounded cursor-pointer transition-opacity-transform duration-1000 ease-in-out transform <%= title === 'Profile' ? 'hidden' : ''%>">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+            viewBox="0 0 256 256" xml:space="preserve"
+            class="navbar-profile-svg w-11 h-11 stroke-white p-2 rounded-full mt-0.5">
+            <defs>
+            </defs>
+            <g transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
+                <path class="fill-white"
+                    d="M 86.114 90 h -6.067 c 0 -19.325 -15.722 -35.047 -35.047 -35.047 C 25.675 54.953 9.954 70.675 9.954 90 H 3.886 C 3.886 67.329 22.33 48.886 45 48.886 C 67.671 48.886 86.114 67.329 86.114 90 z"
+                    transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                <path class="fill-white"
+                    d="M 45 46.488 c -12.817 0 -23.244 -10.427 -23.244 -23.244 S 32.183 0 45 0 c 12.816 0 23.244 10.427 23.244 23.244 S 57.816 46.488 45 46.488 z M 45 6.067 c -9.471 0 -17.176 7.705 -17.176 17.176 c 0 9.471 7.705 17.177 17.176 17.177 c 9.471 0 17.176 -7.705 17.176 -17.177 C 62.176 13.773 54.471 6.067 45 6.067 z"
+                    transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+            </g>
+        </svg>
+    </button>
+
+    <button id='toggler'
+        class="flex justify-center items-center h-[45px] w-[45px] bg-transparent border-none cursor-pointer"
+        type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <svg xmlns="http://www.w3.org/2000/svg" class='h-[33px] w-[33px] rounded-full stroke-white stroke-[1.5]'
+            viewBox="0 0 23 16">
+            <g class='h-4 w-4' fill-rule="evenodd" stroke-linecap="round">
+                <path d="M3.429.75h15M1.429 7.75h20M3.429 14.80h15" />
+            </g>
+        </svg>
+    </button>
+</div>
+
+<div id="login-popup" class="hidden">
+    <%- include('./login')%>
+</div>
+
+<div id="register-popup" class="hidden">
+    <%- include('./register')%>
+</div>
+
+<div id="toggler-popup"
+    class="hidden fixed top-0 left-0 h-screen w-full flex-col justify-center m-0 items-center z-30 backdrop-blur-xl">
+    <div class="w-full flex flex-col items-center m-0">
+        <button id="close-btn"
+            class="bg-transparent border-none cursor-pointer absolute flex-row w-full flex mx-auto justify-end <%= title === 'Profile' ? 'top-[21px] right-[27px]' : 'top-[21px] right-[27px]' %>">
+            <svg class="fill-white rounded-full stroke-1 w-[45px] h-[45px] transition-colors duration-1000 ease-in-out hover:fill-[#ffffff99] <%= title === 'GeoQuiz' ? 'hover:bg-[#182f3d]' : 'hover:bg-[#c8dae4]' %>"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" version="1.1">
+                <path
+                    d="M777.856 280.192l-33.92-33.952-231.872 231.872-231.84-231.872-33.984 33.888 231.872 231.904-231.84 231.84 33.888 33.984 231.904-231.904 231.84 231.872 33.952-33.888-231.872-231.904z" />
+            </svg>
+        </button>
+        <ul class="con-column text-[80px] text-center opacity-0 pl-0">
+            <li class="list-none gap-[120px]">
+                <a class="no-underline text-white playfair text-thin transition-colors duration-1000 ease-in-out hover:text-gray-300"
+                    aria-current="page" href="/world">World</a>
+            </li>
+            <li class="list-none gap-[120px]">
+                <a class="no-underline text-white playfair text-thin transition-colors duration-1000 ease-in-out hover:text-gray-300"
+                    aria-current="page" href="/as">Asia</a>
+            </li>
+            <li class="list-none gap-[120px]">
+                <a class="no-underline text-white playfair text-thin transition-colors duration-1000 ease-in-out hover:text-gray-300"
+                    aria-current="page" href="/af">Africa</a>
+            </li>
+            <li class="list-none gap-[120px]">
+                <a class="no-underline text-white playfair text-thin transition-colors duration-1000 ease-in-out hover:text-gray-300"
+                    aria-current="page" href="/am">Americas</a>
+            </li>
+            <li class="list-none gap-[120px]">
+                <a class="no-underline text-white playfair text-thin transition-colors duration-1000 ease-in-out hover:text-gray-300"
+                    aria-current="page" href="/eu">Europe</a>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,1 +1,123 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'Inter-Regular';
+    src: url('/fonts/Inter-Regular.ttf') format('truetype');
+}
+
+/* @font-face {
+    font-family: 'Raleway';
+    src: url('/fonts/Raleway/Raleway-Light.ttf') format('truetype');
+} */
+
+@font-face {
+    font-family: 'Noto';
+    src: url('/fonts/NotoSansLinearA-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Playfair';
+    src: url('/fonts/PlayfairDisplay-Medium.ttf') format('truetype');
+}
+
+/* Home */
+.main-content {
+    animation: slideUp 1s ease-in-out forwards;
+    transition: opacity 1s ease-in-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(18%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Register */
+
+.focus-label {
+    transition: font-size 0.2s, padding-top 0.2s, height 0.2s, color 0.2s, border 0.2s, outline 0.2s;
+    font-size: 13px !important;
+    color: #ffffff99;
+    padding-top: 4px !important;
+}
+
+.focus {
+    transition: border 0.2s, outline 0.2s;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    outline: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.warning {
+    color: rgba(255, 0, 0, .9) !important;
+}
+
+/* Africa */
+
+
+/* toggler */
+.con-column {
+    animation: slideIn 0.8s ease-in-out forwards;
+    transition: opacity 1s ease-in-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(18%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Nav */
+.nav-grid {
+    grid-template-columns: 1fr 2fr 1fr;
+}
+
+/* Africa */
+
+.path-country {
+    fill: #7ea7af;
+    stroke: #bfd7e6;
+    stroke-width: 0.3px;
+    cursor: pointer;
+}
+
+.path-country:hover {
+    fill: #7ea7af99;
+}
+
+.path-country-light:hover {
+    fill: rgba(255, 255, 255, 0.24) !important;
+}
+
+.kosovo-country:hover {
+    fill: rgba(255, 255, 255, 0.24);
+}
+
+.circle-malta:hover {
+    fill: rgba(126, 167, 175, 0.5);
+}
+
+.circle:hover {
+    fill: #bfd7e6 !important;
+}
+
+.circle-malta:hover {
+    fill: rgba(126, 167, 175, 0.5);
+}
+
+.text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
