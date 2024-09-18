@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-btns',
+  selector: 'app-africa',
   standalone: true,
   imports: [],
-  templateUrl: './btns.component.html',
+  templateUrl: './africa.component.html',
   styleUrl: '../../../styles.css'
 })
-export class BtnsComponent {
+export class AfricaComponent {
 
 }

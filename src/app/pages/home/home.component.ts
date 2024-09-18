@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BtnsComponent } from '../../components/btns/btns.component';
+import { BtnsComponent } from '../../shared/nav/btns.component';
 @Component({
   selector: 'app-home',
   standalone: true,

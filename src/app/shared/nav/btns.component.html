@@ -1,5 +1,5 @@
 <div class="flex flex-row absolute top-[21px] right-[27px] z-20">
-    <button id="login-btn"
+    <button #loginBtn
         class="flex justify-center h-[45px] w-[45px] bg-transparent rounded cursor-pointer transition-opacity-transform duration-1000 ease-in-out transform <%= title === 'Profile' ? 'hidden' : ''%>">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
             viewBox="0 0 256 256" xml:space="preserve"
@@ -17,7 +17,7 @@
         </svg>
     </button>
 
-    <button id='toggler'
+    <button #togglerBtn
         class="flex justify-center items-center h-[45px] w-[45px] bg-transparent border-none cursor-pointer"
         type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
         aria-expanded="false" aria-label="Toggle navigation">
@@ -30,44 +30,38 @@
     </button>
 </div>
 
-<div id="login-popup" class="hidden">
-    <%- include('./login')%>
-</div>
+<app-login-popup *ngIf="login" (close)="onLoginClose()"></app-login-popup>
 
-<div id="register-popup" class="hidden">
-    <%- include('./register')%>
-</div>
-
-<div id="toggler-popup"
-    class="hidden fixed top-0 left-0 h-screen w-full flex-col justify-center m-0 items-center z-30 backdrop-blur-xl">
+<div *ngIf="toggler"
+    class="flex fixed top-0 left-0 h-screen w-full flex-col justify-center m-0 items-center place-self-center self-center z-30 backdrop-blur-xl">
     <div class="w-full flex flex-col items-center m-0">
-        <button id="close-btn"
-            class="bg-transparent border-none cursor-pointer absolute flex-row w-full flex mx-auto justify-end <%= title === 'Profile' ? 'top-[21px] right-[27px]' : 'top-[21px] right-[27px]' %>">
+        <button #togglerCloseBtn
+            class="bg-transparent border-none cursor-pointer absolute flex-row w-full flex mx-auto justify-end top-5 right-7">
             <svg class="fill-white rounded-full stroke-1 w-[45px] h-[45px] transition-colors duration-1000 ease-in-out hover:fill-[#ffffff99] <%= title === 'GeoQuiz' ? 'hover:bg-[#182f3d]' : 'hover:bg-[#c8dae4]' %>"
                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" version="1.1">
                 <path
                     d="M777.856 280.192l-33.92-33.952-231.872 231.872-231.84-231.872-33.984 33.888 231.872 231.904-231.84 231.84 33.888 33.984 231.904-231.904 231.84 231.872 33.952-33.888-231.872-231.904z" />
             </svg>
         </button>
-        <ul class="con-column text-[80px] text-center opacity-0 pl-0">
+        <ul class="con-column text-[80px] text-center opacity-0 pl-0 font-playfair">
             <li class="list-none gap-[120px]">
-                <a class="no-underline text-white playfair text-thin transition-colors duration-1000 ease-in-out hover:text-gray-300"
+                <a class="no-underline text-white text-thin transition-colors duration-1000 ease-in-out hover:text-gray-300"
                     aria-current="page" href="/world">World</a>
             </li>
             <li class="list-none gap-[120px]">
-                <a class="no-underline text-white playfair text-thin transition-colors duration-1000 ease-in-out hover:text-gray-300"
+                <a class="no-underline text-white text-thin transition-colors duration-1000 ease-in-out hover:text-gray-300"
                     aria-current="page" href="/as">Asia</a>
             </li>
             <li class="list-none gap-[120px]">
-                <a class="no-underline text-white playfair text-thin transition-colors duration-1000 ease-in-out hover:text-gray-300"
+                <a class="no-underline text-white  text-thin transition-colors duration-1000 ease-in-out hover:text-gray-300"
                     aria-current="page" href="/af">Africa</a>
             </li>
             <li class="list-none gap-[120px]">
-                <a class="no-underline text-white playfair text-thin transition-colors duration-1000 ease-in-out hover:text-gray-300"
+                <a class="no-underline text-white text-thin transition-colors duration-1000 ease-in-out hover:text-gray-300"
                     aria-current="page" href="/am">Americas</a>
             </li>
             <li class="list-none gap-[120px]">
-                <a class="no-underline text-white playfair text-thin transition-colors duration-1000 ease-in-out hover:text-gray-300"
+                <a class="no-underline text-white text-thin transition-colors duration-1000 ease-in-out hover:text-gray-300"
                     aria-current="page" href="/eu">Europe</a>
             </li>
         </ul>

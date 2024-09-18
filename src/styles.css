@@ -7,10 +7,10 @@
     src: url('/fonts/Inter-Regular.ttf') format('truetype');
 }
 
-/* @font-face {
+@font-face {
     font-family: 'Raleway';
-    src: url('/fonts/Raleway/Raleway-Light.ttf') format('truetype');
-} */
+    src: url('/fonts/Raleway-Medium.ttf') format('truetype');
+}
 
 @font-face {
     font-family: 'Noto';
@@ -120,4 +120,9 @@
 
 .text-shadow {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.border:focus {
+    /* border: none; */
+    outline: none;
 }

@@ -1,14 +1,11 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component'; // Ensure this import is correct
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter([
-      { path: '', component: HomeComponent },
-    ]),
+    provideRouter(routes),
     provideClientHydration(),
     provideZoneChangeDetection(),
   ],
