@@ -10,36 +10,20 @@ import { LoginPopupComponent } from '../../components/loginPopup/login-popup.com
     styleUrls: ['../../../styles.css']
 })
 
-export class BtnsComponent implements AfterViewInit {
-    @ViewChild('loginBtn') loginBtn!: ElementRef;
-    @ViewChild('togglerBtn') togglerBtn!: ElementRef;
-    @ViewChild('togglerCloseBtn') togglerCloseBtn!: ElementRef;
+export class BtnsComponent {
     toggler: boolean = false;
     login: boolean = false;
+    register:boolean = false;
 
-    ngAfterViewInit(): void {
-        if (this.loginBtn && this.loginBtn.nativeElement) {
-            this.loginBtn.nativeElement.addEventListener('click', this.onLoginClick.bind(this));
-        }
-        if (this.togglerBtn && this.togglerBtn.nativeElement) {
-            this.togglerBtn.nativeElement.addEventListener('click', this.onTogglerClick.bind(this));
-        }
-    };
-
-    onLoginClick(): void {
+    loginBtn(): void {
         this.login = true;
     };
 
-    onTogglerClick(): void {
+    togglerBtn():void{
         this.toggler = true;
-        setTimeout(() => {
-            if (this.togglerCloseBtn && this.togglerCloseBtn.nativeElement) {
-                this.togglerCloseBtn.nativeElement.addEventListener('click', this.onTogglerClose.bind(this));
-            }
-        }, 0);
-    };
+    }
 
-    onTogglerClose(): void {
+    togglerCloseBtn(): void {
         this.toggler = false;
     }
 

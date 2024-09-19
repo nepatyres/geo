@@ -10,8 +10,13 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, Output, ViewChild }
 
 export class RegisterPopupComponent {
     @Output() back = new EventEmitter<void>();
+    @Output() close = new EventEmitter<void>();
 
     onRegisterBack(): void {
         this.back.emit();
+    }
+
+    onRegisterClose():void{
+        this.close.emit();
     }
 }

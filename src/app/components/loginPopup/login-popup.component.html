@@ -2,7 +2,7 @@
     <div
         class="noto flex fixed w-full h-screen backdrop-blur-xl top-0 left-0 justify-center items-center z-10 transition-opacity-transform duration-1000 ease-in-out transform">
         <div class="p-0 m-0 rounded-2xl relative w-[500px] h-[500px] items-center flex-col flex bg-[#142733]">
-            <svg (click)="onLoginCloseBtn()"
+            <svg (click)="loginCloseBtn()"
                 class="fill-zinc-400 h-11 w-11 flex cursor-pointer absolute right-0 top-0 mr-3 mt-3 rounded-full hover:fill-[#ffffff99] hover:bg-[#182f3d] transition-colors duration-500 ease-in-out"
                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" version="1.1">
                 <path
@@ -22,7 +22,7 @@
                 </form>
                 <p id="warning" class="hidden absolute text-[red]">The username or password you entered is
                     incorrect.</p>
-                <p #registerBtn class="text-[#71767b] text-md w-80 text-start font-thin mt-5">Don't
+                <p (click)="registerBtn()" class="text-[#71767b] text-md w-80 text-start font-thin mt-5">Don't
                     have an account?
                     <button #signupBtn class="text-sky-700">Sign up</button>
                 </p>
@@ -31,4 +31,4 @@
     </div>
 </div>
 
-<app-register-popup *ngIf="register" (back)="onRegisterBack()"></app-register-popup>
+<app-register-popup *ngIf="register" (back)="onRegisterBack()" (close)="onRegisterClose()"></app-register-popup>
