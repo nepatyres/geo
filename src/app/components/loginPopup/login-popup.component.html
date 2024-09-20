@@ -2,7 +2,7 @@
     <div
         class="noto flex fixed w-full h-screen backdrop-blur-xl top-0 left-0 justify-center items-center z-10 transition-opacity-transform duration-1000 ease-in-out transform">
         <div class="p-0 m-0 rounded-2xl relative w-[500px] h-[500px] items-center flex-col flex bg-[#142733]">
-            <svg (click)="loginCloseBtn()"
+            <svg (click)="pLogic.loginClose()"
                 class="fill-zinc-400 h-11 w-11 flex cursor-pointer absolute right-0 top-0 mr-3 mt-3 rounded-full hover:fill-[#ffffff99] hover:bg-[#182f3d] transition-colors duration-500 ease-in-out"
                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" version="1.1">
                 <path
@@ -11,18 +11,18 @@
             <div class="justify-center items-center text-center flex flex-col mt-16">
                 <p class="inter-regular text-2xl mb-4 text-zinc-300">Login to see Game History</p>
                 <form action="/login" method="POST">
-                    <input id="login-username-input"
+                    <input
                         class="w-80 h-14 border pl-2 border-gray-700 focus:outline focus:outline-gray-500 focus:outline-2 rounded appearance-none text-base bg-transparent text-white z-10 mb-3"
                         type="text" maxLength={50} name="username" placeholder="Username" />
-                    <input id="login-password-input"
+                    <input
                         class="w-80 h-14 border pl-2 border-gray-700 rounded appearance-none focus:outline focus:outline-gray-500 focus:outline-2 text-base bg-transparent text-white z-10 mt-2.5"
                         maxLength={50} type="password" name="password" placeholder="Password" />
                     <button
                         class="w-80 mt-24 h-[52px] font-bold border-none rounded-full text-base cursor-pointer bg-slate-200 text-[#182f3d] hover:bg-slate-300 transition-colors duration-500">Login</button>
                 </form>
-                <p id="warning" class="hidden absolute text-[red]">The username or password you entered is
+                <p class="hidden absolute text-[red]">The username or password you entered is
                     incorrect.</p>
-                <p (click)="registerBtn()" class="text-[#71767b] text-md w-80 text-start font-thin mt-5">Don't
+                <p (click)="pLogic.registerBtn()" class="text-[#71767b] text-md w-80 text-start font-thin mt-5">Don't
                     have an account?
                     <button #signupBtn class="text-sky-700">Sign up</button>
                 </p>
@@ -31,4 +31,4 @@
     </div>
 </div>
 
-<app-register-popup *ngIf="register" (back)="onRegisterBack()" (close)="onRegisterClose()"></app-register-popup>
+<register-popup *ngIf="pLogic.register"></register-popup>

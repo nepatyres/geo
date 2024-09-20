@@ -1,5 +1,5 @@
 <div class="flex flex-row absolute top-[21px] right-[27px] z-20">
-    <button (click)="loginBtn()"
+    <button (click)="pLogic.loginBtn()"
         class="flex justify-center h-[45px] w-[45px] bg-transparent rounded cursor-pointer transition-opacity-transform duration-1000 ease-in-out transform <%= title === 'Profile' ? 'hidden' : ''%>">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
             viewBox="0 0 256 256" xml:space="preserve"
@@ -17,7 +17,7 @@
         </svg>
     </button>
 
-    <button (click)="togglerBtn()"
+    <button (click)="pLogic.togglerBtn()"
         class="flex justify-center items-center h-[45px] w-[45px] bg-transparent border-none cursor-pointer"
         type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
         aria-expanded="false" aria-label="Toggle navigation">
@@ -30,12 +30,12 @@
     </button>
 </div>
 
-<app-login-popup *ngIf="login" (loginClose)="onLoginClose()"></app-login-popup>
+<login-popup *ngIf="pLogic.login"></login-popup>
 
-<div *ngIf="toggler"
+<div *ngIf="pLogic.toggler"
     class="flex fixed top-0 left-0 h-screen w-full flex-col justify-center m-0 items-center place-self-center self-center z-30 backdrop-blur-xl">
     <div class="w-full flex flex-col items-center m-0">
-        <button (click)="togglerCloseBtn()"
+        <button (click)="pLogic.togglerClose()"
             class="bg-transparent border-none cursor-pointer absolute flex-row w-full flex mx-auto justify-end top-5 right-7">
             <svg class="fill-white rounded-full stroke-1 w-[45px] h-[45px] transition-colors duration-1000 ease-in-out hover:fill-[#ffffff99] <%= title === 'GeoQuiz' ? 'hover:bg-[#182f3d]' : 'hover:bg-[#c8dae4]' %>"
                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" version="1.1">

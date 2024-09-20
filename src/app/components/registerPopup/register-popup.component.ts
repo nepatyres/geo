@@ -1,7 +1,8 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Output, ViewChild } from "@angular/core";
+import { Component} from "@angular/core";
+import { PopupLogic } from "../../shared/popup-logic.service";
 
 @Component({
-    selector: 'app-register-popup',
+    selector: 'register-popup',
     standalone: true,
     imports: [],
     templateUrl: './register-popup.component.html',
@@ -9,14 +10,5 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, Output, ViewChild }
 })
 
 export class RegisterPopupComponent {
-    @Output() back = new EventEmitter<void>();
-    @Output() close = new EventEmitter<void>();
-
-    onRegisterBack(): void {
-        this.back.emit();
-    }
-
-    onRegisterClose():void{
-        this.close.emit();
-    }
+    constructor(public pLogic: PopupLogic) { }
 }

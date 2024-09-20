@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { BtnsComponent } from '../../shared/nav/btns.component';
+import { NavComponent } from '../../components/nav/nav.component';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [BtnsComponent],
+  imports: [NavComponent],
   templateUrl: './home.component.html',
   styleUrls: ['../../../styles.css']
 })
