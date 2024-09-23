@@ -1,25 +1,20 @@
-import { CommonModule } from '@angular/common';
-import { ElementRef, Injectable, ViewChild, Component } from '@angular/core';
-
-@Component({
-    selector: 'timer-logic',
-    standalone: true,
-    imports: [CommonModule],
-    templateUrl: './timer-logic.component.html',
-    styleUrl: '../../../styles.css'
-})
+import { ElementRef, Injectable, ViewChild } from '@angular/core';
 
 @Injectable({
     providedIn: 'root'
 })
 
-export class TimerLogicComponent {
-    @ViewChild('timer', { static: true }) timer!: ElementRef;
+export class TimerLogic {
+    private timerElement: ElementRef | null = null;
     pause: boolean = false;
     second: number = 0;
     minute: number = 0;
 
     private intervalId: any;
+
+    setTimerElement(element: ElementRef) {
+        this.timerElement = element;
+    }
 
     wrapperBtn() {
         if (!this.pause) {
@@ -31,7 +26,9 @@ export class TimerLogicComponent {
                 } else {
                     this.second += 1
                 }
-                this.timer.nativeElement.textContent = `${this.formatTime(this.minute)}:${this.formatTime(this.second)}`
+                if (this.timerElement) {
+                    this.timerElement.nativeElement.textContent = `${this.formatTime(this.minute)}:${this.formatTime(this.second)}`
+                }
             }, 1000)
         }
     }

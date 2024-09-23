@@ -1,6 +1,6 @@
 <div class="main-timer flex flex-row justify-start my-2.5 items-center">
     <button class="bg-transparent border-none cursor-pointer">
-        <svg *ngIf="pause" (click)="pauseBtn()" style="enable-background:new 0 0 512 512;" version="1.1"
+        <svg *ngIf="tLogic.pause" (click)="tLogic.pauseBtn()" style="enable-background:new 0 0 512 512;" version="1.1"
             viewBox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink" id="btn-pause-svg"
             class="bg-transparent w-[30px] h-[30px] fill-white border-none align-middle">
@@ -11,7 +11,7 @@
                     d="M371.8,64h-71.6c-6.7,0-12.2,5.4-12.2,12.1v359.7c0,6.7,5.4,12.2,12.2,12.2h71.6c6.7,0,12.2-5.4,12.2-12.2V76.1   C384,69.4,378.6,64,371.8,64z" />
             </g>
         </svg>
-        <svg *ngIf="!pause" (click)="wrapperBtn()" style="enable-background:new 0 0 512 512;" version="1.1"
+        <svg *ngIf="!tLogic.pause" (click)="tLogic.wrapperBtn()" style="enable-background:new 0 0 512 512;" version="1.1"
             viewBox="0 0 512 512" id="btn-resume-svg"
             class="bg-transparent w-[30px] h-[30px] fill-white border-none align-middle" xml:space="preserve"
             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

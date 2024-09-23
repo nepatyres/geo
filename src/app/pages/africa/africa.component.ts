@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { CountriesNavComponent } from '../../components/countriesNav/countries-nav.component';
-import { TimerLogicComponent } from '../../components/timerLogic/timer-logic.component';
+import { GameLogic } from '../../shared/game-logic.service';
+import { TimerLogic } from '../../shared/timer-logic.service';
 
 @Component({
   selector: 'app-africa',
@@ -8,13 +9,8 @@ import { TimerLogicComponent } from '../../components/timerLogic/timer-logic.com
   imports: [CountriesNavComponent],
   templateUrl: './africa.component.html',
   styleUrl: '../../../styles.css',
-  providers: [TimerLogicComponent]
 })
 export class AfricaComponent {
-  constructor(public tLogic: TimerLogicComponent) {}
-  
-  svgClick() {
-    console.log('click')
-    this.tLogic.wrapperBtn()
-  }
+  constructor(public tLogic: TimerLogic, public gLogic: GameLogic) { }
+
 }
