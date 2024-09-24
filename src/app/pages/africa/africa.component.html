@@ -1,6 +1,7 @@
 <title>Africa</title>
 
 <div class="m-0 overflow-hidden bg-[#142733] select-none">
+    <score-popup *ngIf="sLogic.scoreDisplay"></score-popup>
     <div class='flex flex-col'>
         <countries-nav></countries-nav>
         <div id="main-map" class="flex h-screen bg-[#bfd7e6] w-full fixed">

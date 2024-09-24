@@ -1,33 +1,31 @@
-<div id="quiz-popup"
-    class="flexw-full h-full absolute top-0 left-0 justify-center items-center z-30 transition-transform duration-1000">
+<div
+    class="flex w-full h-full absolute top-0 left-0 justify-center items-center z-30 transition-transform duration-1000">
     <div class="p-0 m-0 rounded-[15px] relative w-[500px] h-[500px] text-center flex-col flex bg-[#142733]">
         <div class="mt-[18%]">
-            <div>
-                <svg id="quiz-popup-close-btn"
-                    class="h-[45px] w-[45px] mr-[12px] mt-[12px] right-0 top-0 absolute rounded-full flex cursor-pointer fill-zinc-400 hover:fill-[#ffffff99] hover:bg-[#182f3d] transition-colors duration-500"
-                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" version="1.1">
-                    <path
-                        d="M777.856 280.192l-33.92-33.952-231.872 231.872-231.84-231.872-33.984 33.888 231.872 231.904-231.84 231.84 33.888 33.984 231.904-231.904 231.84 231.872 33.952-33.888-231.872-231.904z" />
-                </svg>
-            </div>
-            <h1 id="quiz-title" class="text-white inter-regular text-[32px] font-bold">Exellent!🥳</h1>
+            <svg (click)="sLogic.scoreClose()"
+                class="h-[45px] w-[45px] mr-[12px] mt-[12px] right-0 top-0 absolute rounded-full flex cursor-pointer fill-zinc-400 hover:fill-[#ffffff99] hover:bg-[#182f3d] transition-colors duration-500"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" version="1.1">
+                <path
+                    d="M777.856 280.192l-33.92-33.952-231.872 231.872-231.84-231.872-33.984 33.888 231.872 231.904-231.84 231.84 33.888 33.984 231.904-231.904 231.84 231.872 33.952-33.888-231.872-231.904z" />
+            </svg>
+            <h1 #quizTitle class="text-white inter-regular text-3xl font-bold">Exellent!🥳</h1>
             <div
-                class="grid flex-row justify-between mx-[20px] inter-regular text-[20px] mt-[60px] grid-cols-3 text-[#ffffff99]">
+                class="grid flex-row justify-between mx-5 inter-regular text-2xl mt-[60px] grid-cols-3 text-[#ffffff99]">
                 <div id="score-main" class="flex flex-col gap-[15px]">
                     <span>Score</span>
-                    <span id="quiz-score" class="text-white">0/46</span>
+                    <span #QuizScore class="text-white">0/0</span>
                 </div>
                 <div id="attempts-main" class="flex flex-col gap-[15px]">
                     <span>Attempts</span>
-                    <span id="quiz-attempts" class="text-white">0</span>
+                    <span #quizAttempts class="text-white">0</span>
                 </div>
                 <div id="time-main" class="flex flex-col gap-[15px]">
                     <span>Time</span>
-                    <span id="quiz-time" class="text-white">00:00</span>
+                    <span #quizTime class="text-white">00:00</span>
                 </div>
             </div>
-            <button id="new-game-btn"
-                class="text-white border border-[#ffffff40] rounded-[30px] py-[15px] px-[45px] bg-transparent cursor-pointer mt-[80px] text-[20px] raleway transition-colors duration-500 hover:bg-[#182f3d]">New
+            <button (click)="sLogic.newGame()"
+                class="text-white border border-[#ffffff40] rounded-[30px] py-4 px-12 bg-transparent cursor-pointer mt-20 text-xl raleway transition-colors duration-500 hover:bg-[#182f3d]">New
                 Game</button>
         </div>
     </div>

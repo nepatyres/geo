@@ -44,26 +44,13 @@
             </svg>
         </button>
         <ul class="con-column text-[80px] text-center opacity-0 pl-0 font-playfair">
-            <li class="list-none gap-[120px]">
-                <a class="no-underline text-white text-thin transition-colors duration-1000 ease-in-out hover:text-gray-300"
-                    aria-current="page" href="/world">World</a>
+            <li *ngFor="let continent of continents" class="list-none gap-[120px]">
+              <a class="no-underline text-white text-thin transition-colors duration-1000 ease-in-out hover:text-gray-300"
+                 aria-current="page" [attr.href]="'/' + continent.toLowerCase()">
+                 {{ continent }}
+              </a>
             </li>
-            <li class="list-none gap-[120px]">
-                <a class="no-underline text-white text-thin transition-colors duration-1000 ease-in-out hover:text-gray-300"
-                    aria-current="page" href="/as">Asia</a>
-            </li>
-            <li class="list-none gap-[120px]">
-                <a class="no-underline text-white  text-thin transition-colors duration-1000 ease-in-out hover:text-gray-300"
-                    aria-current="page" href="/af">Africa</a>
-            </li>
-            <li class="list-none gap-[120px]">
-                <a class="no-underline text-white text-thin transition-colors duration-1000 ease-in-out hover:text-gray-300"
-                    aria-current="page" href="/am">Americas</a>
-            </li>
-            <li class="list-none gap-[120px]">
-                <a class="no-underline text-white text-thin transition-colors duration-1000 ease-in-out hover:text-gray-300"
-                    aria-current="page" href="/eu">Europe</a>
-            </li>
-        </ul>
+          </ul>
+          
     </div>
 </div>

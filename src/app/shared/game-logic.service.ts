@@ -1,11 +1,14 @@
 import { ElementRef, Injectable } from '@angular/core';
 import { Africa, Americas, Asia, Europe, World } from '../constants/countries';
+import { TimerLogic } from './timer-logic.service';
+import { ScoreLogic } from './score-logic.service';
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class GameLogic {
+    constructor(public tLogic: TimerLogic, public sLogic: ScoreLogic) { }
     private countryName: ElementRef | null = null
     game: boolean = true
     statsPopup = false
@@ -26,7 +29,7 @@ export class GameLogic {
     }
 
     wrapperBtn(con: string) {
-        if (!this.gameStarted) {
+        if (!this.gameStarted && this.game) {
             this.gameStarted = true
             this.continent =
                 con === 'Africa' ? Africa :
@@ -36,11 +39,7 @@ export class GameLogic {
             this.countriesCount = this.continent.length
             this.countriesCountAtStart = this.continent.length
             this.continentAtStart = this.continent
-            if (this.countryName) {
-                this.countryName.nativeElement.textContent = this.continent[this.random()]
-            }
-        } else {
-            this.round()
+            this.nextRound()
         }
     }
 
@@ -48,14 +47,16 @@ export class GameLogic {
         if (this.gameStarted && event && this.countryName) {
             const clickedCountry = (event.target as HTMLElement).id
             const country = (event.target as HTMLElement)
-            const countryName = this.countryName.nativeElement.textContent.trim();
-            const tspanElement = document.getElementById(`${clickedCountry}-tspan`);
+            const countryName = this.countryName.nativeElement.textContent
+            const tspanElement = document.getElementById(`${clickedCountry}-tspan`)
             if (clickedCountry === countryName) {
                 country.style.fill = 'rgba(20,39,51,0.8)'
                 tspanElement?.classList.remove('hidden')
-                setTimeout(() => {
-                    tspanElement?.classList.add('hidden')
-                }, 1000)
+                if(this.countriesCount){
+                    setTimeout(() => {
+                        tspanElement?.classList.add('hidden')
+                    }, 1000)
+                }
                 this.score++
                 this.nextRound()
             } else if (clickedCountry && countryName && this.continent.includes(clickedCountry)) {
@@ -76,21 +77,21 @@ export class GameLogic {
     skipBtn() {
         const countryName = this.countryName?.nativeElement.textContent
         const correctCountry = document.getElementById(countryName)
-        if (this.countryName && this.gameStarted && this.countriesCount > 0) {
+        if (this.countryName && this.gameStarted && this.countriesCount >= 0) {
             const tspanElement = document.getElementById(`${countryName}-tspan`)
             tspanElement?.classList.remove('hidden')
             correctCountry?.style?.setProperty('fill', 'rgba(20,39,51,0.8)')
-            setTimeout(() => {
-                tspanElement?.classList.add('hidden')
-            }, 1000)
+            if (this.countriesCount > 1) {
+                setTimeout(() => {
+                    tspanElement?.classList.add('hidden')
+                }, 1000)
+            }
             this.nextRound()
-        } else {
-            this.gameEnd()
         }
     }
 
     nextRound() {
-        if (this.gameStarted && this.countryName && this.countriesCount > 0) {
+        if (this.gameStarted && this.countryName && this.countriesCount >= 1) {
             const skipCountry = this.countryName.nativeElement.textContent
             this.continent = this.continent.filter(country => country !== skipCountry)
             this.countriesCount--
@@ -105,6 +106,8 @@ export class GameLogic {
             console.log('game end')
             this.gameStarted = false
             this.game = false
+            this.tLogic.stopTimer()
+            this.sLogic.scorePopup(this.countriesCountAtStart, this.score, this.attempts)
             for (let i = 0; i <= this.countriesCountAtStart; i++) {
                 const tspanElement = document.getElementById(`${this.continentAtStart[i]}-tspan`)
                 tspanElement?.classList.remove('hidden')

@@ -1,6 +1,6 @@
-import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-import { GameLogic } from '../../../shared/game-logic.service';
+import { CommonModule } from '@angular/common'
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core'
+import { GameLogic } from '../../../shared/game-logic.service'
 
 @Component({
     selector: 'game',
@@ -11,10 +11,10 @@ import { GameLogic } from '../../../shared/game-logic.service';
 })
 
 export class GameComponent implements AfterViewInit {
-    @ViewChild('countryName') countryNameElement !: ElementRef;
+    @ViewChild('countryName') countryNameElement !: ElementRef
     constructor(public gLogic: GameLogic){}
 
     ngAfterViewInit(): void {
-        this.gLogic.setCountryNameElement(this.countryNameElement);
+        this.gLogic.setCountryNameElement(this.countryNameElement)
     }
 }

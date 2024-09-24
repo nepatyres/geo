@@ -11,10 +11,10 @@ import { TimerLogic } from '../../../shared/timer-logic.service';
 })
 
 export class TimerComponent implements AfterViewInit {
-    @ViewChild('timer') timerElement!: ElementRef;
+    @ViewChild('timer') timerElement!: ElementRef
     constructor(public tLogic: TimerLogic) { }
 
     ngAfterViewInit() {
-        this.tLogic.setTimerElement(this.timerElement);
+        this.tLogic.setTimerElement(this.timerElement)
     }
 }
