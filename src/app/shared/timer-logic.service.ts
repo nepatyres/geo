@@ -1,10 +1,12 @@
 import { ElementRef, Injectable, ViewChild } from '@angular/core';
+import { GameLogic } from './game-logic.service';
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class TimerLogic {
+    // constructor(public gLogic: GameLogic){}
     private timerElement: ElementRef | null = null;
     pause: boolean = false;
     second: number = 0;
@@ -21,10 +23,10 @@ export class TimerLogic {
             this.pause = true;
             this.intervalId = setInterval(() => {
                 if (this.second + 1 === 60) {
-                    this.minute = + 1
+                    this.minute++
                     this.second = 0
                 } else {
-                    this.second += 1
+                    this.second++
                 }
                 if (this.timerElement) {
                     this.timerElement.nativeElement.textContent = `${this.formatTime(this.minute)}:${this.formatTime(this.second)}`

@@ -7,9 +7,13 @@ import { Africa, Americas, Asia, Europe, World } from '../constants/countries';
 
 export class GameLogic {
     private countryName: ElementRef | null = null
+    game: boolean = true
+    statsPopup = false
     gameStarted: boolean = false
     continent: string[] = ['']
+    continentAtStart: string[] = ['']
     countriesCount: number = 0
+    countriesCountAtStart: number = 0
     score: number = 0
     attempts: number = 0
 
@@ -30,6 +34,8 @@ export class GameLogic {
                         con === 'Asia' ? Asia :
                             con === 'Europe' ? Europe : World
             this.countriesCount = this.continent.length
+            this.countriesCountAtStart = this.continent.length
+            this.continentAtStart = this.continent
             if (this.countryName) {
                 this.countryName.nativeElement.textContent = this.continent[this.random()]
             }
@@ -45,19 +51,17 @@ export class GameLogic {
             const countryName = this.countryName.nativeElement.textContent.trim();
             const tspanElement = document.getElementById(`${clickedCountry}-tspan`);
             if (clickedCountry === countryName) {
-                country.style.fill = 'rgba(20,39,51,0.8)';
-                if(tspanElement){
-                    tspanElement.classList.remove('hidden')
-                    setTimeout(() => {
-                        tspanElement.classList.add('hidden')
-                    }, 1000)
-                    this.score++
-                }
-
-            } else if(clickedCountry && countryName && this.continent.includes(clickedCountry)) {
+                country.style.fill = 'rgba(20,39,51,0.8)'
+                tspanElement?.classList.remove('hidden')
+                setTimeout(() => {
+                    tspanElement?.classList.add('hidden')
+                }, 1000)
+                this.score++
+                this.nextRound()
+            } else if (clickedCountry && countryName && this.continent.includes(clickedCountry)) {
                 country.style.fill = 'rgba(155, 1, 1,0.8)'
                 country.style.transition = 'fill 0.2s ease'
-                if(tspanElement){
+                if (tspanElement) {
                     tspanElement.classList.remove('hidden')
                     setTimeout(() => {
                         country.style.fill = ''
@@ -70,13 +74,41 @@ export class GameLogic {
     }
 
     skipBtn() {
+        const countryName = this.countryName?.nativeElement.textContent
+        const correctCountry = document.getElementById(countryName)
         if (this.countryName && this.gameStarted && this.countriesCount > 0) {
+            const tspanElement = document.getElementById(`${countryName}-tspan`)
+            tspanElement?.classList.remove('hidden')
+            correctCountry?.style?.setProperty('fill', 'rgba(20,39,51,0.8)')
+            setTimeout(() => {
+                tspanElement?.classList.add('hidden')
+            }, 1000)
+            this.nextRound()
+        } else {
+            this.gameEnd()
+        }
+    }
+
+    nextRound() {
+        if (this.gameStarted && this.countryName && this.countriesCount > 0) {
             const skipCountry = this.countryName.nativeElement.textContent
             this.continent = this.continent.filter(country => country !== skipCountry)
             this.countriesCount--
-            this.round()
+            this.countryName.nativeElement.textContent = this.continent[this.random()]
         } else {
+            this.gameEnd()
+        }
+    }
+
+    gameEnd() {
+        if (this.gameStarted) {
+            console.log('game end')
             this.gameStarted = false
+            this.game = false
+            for (let i = 0; i <= this.countriesCountAtStart; i++) {
+                const tspanElement = document.getElementById(`${this.continentAtStart[i]}-tspan`)
+                tspanElement?.classList.remove('hidden')
+            }
         }
     }
 }
