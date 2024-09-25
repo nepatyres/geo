@@ -1,21 +1,17 @@
-import { ElementRef, Injectable, ViewChild } from '@angular/core';
+import {Injectable } from '@angular/core';
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class TimerLogic {
-    private timerElement: ElementRef | null = null;
+    timer: string = '00:00'
     pause: boolean = false
     stop: boolean = false
     second: number = 0
     minute: number = 0
 
     private intervalId: any;
-
-    setTimerElement(element: ElementRef) {
-        this.timerElement = element
-    }
 
     wrapperBtn() {
         if (!this.pause && !this.stop) {
@@ -27,9 +23,7 @@ export class TimerLogic {
                 } else {
                     this.second++
                 }
-                if (this.timerElement) {
-                    this.timerElement.nativeElement.textContent = `${this.formatTime(this.minute)}:${this.formatTime(this.second)}`
-                }
+                this.timer = `${this.formatTime(this.minute)}:${this.formatTime(this.second)}`
             }, 1000)
         }
     }
@@ -51,7 +45,7 @@ export class TimerLogic {
         this.stop = true
     }
 
-    getTime(){
+    getTime() {
         return `${this.formatTime(this.minute)}:${this.formatTime(this.second)}`
     }
 }

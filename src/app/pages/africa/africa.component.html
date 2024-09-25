@@ -4,14 +4,14 @@
     <score-popup *ngIf="sLogic.scoreDisplay"></score-popup>
     <div class='flex flex-col'>
         <countries-nav></countries-nav>
-        <div id="main-map" class="flex h-screen bg-[#bfd7e6] w-full fixed">
-            <svg (click)="tLogic.wrapperBtn()" (click)="gLogic.wrapperBtn('Africa')"
-                class="h-screen w-full bg-[#bfd7e6] cursor-grab flex mx-auto pt-[40%] sm:pt-[10%] md:pt-[6%] md:pl-[5%] lg:pt-[50px] lg:pl-[5%] xl:pl-[15%] 2xl:pl-[25%]"
-                preserveAspectRatio="xMinYMin">
-                <g id="map-group">
+        <div class="flex h-screen w-full fixed cursor-pointer items-center justify-center bg-[#bfd7e6]">
+            <svg  (click)="tLogic.wrapperBtn()" (click)="gLogic.wrapperBtn('Africa')"
+                class="h-full w-full bg-[#bfd7e6]" viewBox="0 0 1000 1000"
+                preserveAspectRatio="xMidYMid meet">
+                <g #mapSvg>
                     <svg xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
                         xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-                        xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" id="map" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" version="1.1"
                         sodipodi:docname="africa.svg" inkscape:version="1.3 (0e150ed, 2023-07-21)"
                         viewBox="0 0 303.859 303.469" preserveAspectRatio="xMinYMin">
 

@@ -1,17 +1,29 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from "@angular/core";
 import { NavComponent } from "../../components/nav/nav.component";
 import { CommonModule } from "@angular/common";
-import { TimerComponent } from "./timer/timer.component";
+import { TimerComponent } from "./timer.component";
 import { GameLogic } from "../../shared/game-logic.service";
 import { TimerLogic } from "../../shared/timer-logic.service";
-import { GameComponent } from "./game/game.component";
+import { GameComponent } from "./game.component";
 
 @Component({
     selector: 'countries-nav',
     standalone: true,
     imports: [NavComponent, TimerComponent, CommonModule, GameComponent],
     styleUrl: '../../../styles.css',
-    templateUrl: './countries-nav.component.html'
+    template: 
+    `<div class="w-full h-[86px] absolute z-20 items-center flex">
+     <div class="grid flex-row w-[90%] my-0 mx-auto nav-grid">
+
+        <timer></timer>
+
+        <game></game>
+
+        <div id="toggler-main" class="items-center justify-end flex">
+            <nav></nav>
+        </div>
+     </div>
+    </div>`
 })
 
 export class CountriesNavComponent {

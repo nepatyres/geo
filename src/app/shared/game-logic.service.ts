@@ -1,4 +1,4 @@
-import { ElementRef, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Africa, Americas, Asia, Europe, World } from '../constants/countries';
 import { TimerLogic } from './timer-logic.service';
 import { ScoreLogic } from './score-logic.service';
@@ -9,7 +9,6 @@ import { ScoreLogic } from './score-logic.service';
 
 export class GameLogic {
     constructor(public tLogic: TimerLogic, public sLogic: ScoreLogic) { }
-    private countryName: ElementRef | null = null
     game: boolean = true
     statsPopup = false
     gameStarted: boolean = false
@@ -17,12 +16,10 @@ export class GameLogic {
     continentAtStart: string[] = ['']
     countriesCount: number = 0
     countriesCountAtStart: number = 0
+    displayCountryName: string = 'Click on'
+    countryName: string = 'Click on'
     score: number = 0
     attempts: number = 0
-
-    setCountryNameElement(element: ElementRef) {
-        this.countryName = element
-    }
 
     random() {
         return Math.floor(Math.random() * this.continent.length)
@@ -47,9 +44,8 @@ export class GameLogic {
         if (this.gameStarted && event && this.countryName) {
             const clickedCountry = (event.target as HTMLElement).id
             const country = (event.target as HTMLElement)
-            const countryName = this.countryName.nativeElement.textContent
             const tspanElement = document.getElementById(`${clickedCountry}-tspan`)
-            if (clickedCountry === countryName) {
+            if (clickedCountry === this.countryName) {
                 country.style.fill = 'rgba(20,39,51,0.8)'
                 tspanElement?.classList.remove('hidden')
                 if(this.countriesCount){
@@ -59,7 +55,7 @@ export class GameLogic {
                 }
                 this.score++
                 this.nextRound()
-            } else if (clickedCountry && countryName && this.continent.includes(clickedCountry)) {
+            } else if (clickedCountry && this.countryName && this.continent.includes(clickedCountry)) {
                 country.style.fill = 'rgba(155, 1, 1,0.8)'
                 country.style.transition = 'fill 0.2s ease'
                 if (tspanElement) {
@@ -75,10 +71,9 @@ export class GameLogic {
     }
 
     skipBtn() {
-        const countryName = this.countryName?.nativeElement.textContent
-        const correctCountry = document.getElementById(countryName)
+        const correctCountry = document.getElementById(this.countryName)
         if (this.countryName && this.gameStarted && this.countriesCount >= 0) {
-            const tspanElement = document.getElementById(`${countryName}-tspan`)
+            const tspanElement = document.getElementById(`${this.countryName}-tspan`)
             tspanElement?.classList.remove('hidden')
             correctCountry?.style?.setProperty('fill', 'rgba(20,39,51,0.8)')
             if (this.countriesCount > 1) {
@@ -92,10 +87,11 @@ export class GameLogic {
 
     nextRound() {
         if (this.gameStarted && this.countryName && this.countriesCount >= 1) {
-            const skipCountry = this.countryName.nativeElement.textContent
-            this.continent = this.continent.filter(country => country !== skipCountry)
+            this.continent = this.continent.filter(country => country !== this.countryName)
             this.countriesCount--
-            this.countryName.nativeElement.textContent = this.continent[this.random()]
+            this.countryName = this.continent[this.random()]
+            this.displayCountryName = this.countryName.replace(/-/g, ' ')
+            
         } else {
             this.gameEnd()
         }
@@ -103,7 +99,6 @@ export class GameLogic {
 
     gameEnd() {
         if (this.gameStarted) {
-            console.log('game end')
             this.gameStarted = false
             this.game = false
             this.tLogic.stopTimer()
