@@ -4,9 +4,9 @@
     <score-popup *ngIf="sLogic.scoreDisplay"></score-popup>
     <div class='flex flex-col'>
         <countries-nav></countries-nav>
-        <div class="flex h-screen w-full fixed cursor-pointer items-center justify-center bg-[#bfd7e6]">
-            <svg  (click)="tLogic.wrapperBtn()" (click)="gLogic.wrapperBtn('Africa')"
-                class="h-full w-full bg-[#bfd7e6]" viewBox="0 0 1000 1000"
+        <div class="flex h-screen w-full fixed items-center justify-center bg-[#bfd7e6]">
+            <svg #wrapper (click)="tLogic.wrapperBtn()" (click)="gLogic.wrapperBtn('Africa')"
+                class="h-full w-full bg-[#bfd7e6] cursor-grab" viewBox="0 0 1000 1000"
                 preserveAspectRatio="xMidYMid meet">
                 <g #mapSvg>
                     <svg xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"

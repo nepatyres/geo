@@ -8,13 +8,13 @@ import { CommonModule } from '@angular/common';
 import { ZoomLogic } from '../../shared/zoom-logic.service';
 
 @Component({
-  selector: 'app-africa',
+  selector: 'app-americas',
   standalone: true,
   imports: [CountriesNavComponent, ScorePopupComponent, CommonModule],
-  templateUrl: './africa.component.html',
+  templateUrl: './americas.component.html',
   styleUrl: '../../../styles.css',
 })
-export class AfricaComponent implements AfterViewInit {
+export class AmericasComponent implements AfterViewInit {
 
   @ViewChild('mapSvg') mapSvg!: ElementRef<SVGSVGElement>;
   @ViewChild('wrapper') wrapper!: ElementRef<HTMLDivElement>;

@@ -17,10 +17,11 @@ import { ZoomLogic } from '../../shared/zoom-logic.service';
 export class WorldComponent implements AfterViewInit {
 
   @ViewChild('mapSvg') mapSvg!: ElementRef<SVGSVGElement>;
+  @ViewChild('wrapper') wrapper!: ElementRef<HTMLElement>;
 
   constructor(public tLogic: TimerLogic, public gLogic: GameLogic, public sLogic: ScoreLogic, public zLogic: ZoomLogic) { }
 
   ngAfterViewInit() {
-    this.zLogic.initializeZoom(this.mapSvg.nativeElement);
+    this.zLogic.initializeZoom(this.mapSvg.nativeElement, this.wrapper.nativeElement);
   }
 }

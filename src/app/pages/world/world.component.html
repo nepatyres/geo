@@ -4,11 +4,11 @@
     <score-popup *ngIf="sLogic.scoreDisplay"></score-popup>
     <div class='flex flex-col'>
         <countries-nav></countries-nav>
-        <div class="flex h-screen w-full fixed cursor-pointer items-center justify-center bg-[#bfd7e6]">
-            <svg #mapSvg (click)="tLogic.wrapperBtn()" (click)="gLogic.wrapperBtn('World')"
-                class="h-full w-full bg-[#bfd7e6] pt-[400px] sm:pt-[300px] md:pt-[250px] lg:pt-[180px] xl:pt-[100px] 2xl:pt-[0px]"
-                viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet">
-                <g>
+        <div class="flex h-screen w-full fixed items-center justify-center bg-[#bfd7e6]">
+            <svg #wrapper (click)="tLogic.wrapperBtn()" (click)="gLogic.wrapperBtn('World')"
+                class="h-full w-full cursor-grab bg-[#bfd7e6] pt-[400px] sm:pt-[300px] md:pt-[250px] lg:pt-[180px] xl:pt-[100px] 2xl:pt-[0px]"
+                preserveAspectRatio="xMidYMid meet">
+                <g #mapSvg>
                     <svg xmlns="http://www.w3.org/2000/svg" id="map" stroke-linecap="round" stroke-linejoin="round"
                         version="1.2" viewBox="0 0 895.92 471.76" preserveAspectRatio="xMinYMin">
 

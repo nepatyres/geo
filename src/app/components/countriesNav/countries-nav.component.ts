@@ -11,17 +11,15 @@ import { GameComponent } from "./game.component";
     standalone: true,
     imports: [NavComponent, TimerComponent, CommonModule, GameComponent],
     styleUrl: '../../../styles.css',
-    template: 
-    `<div class="w-full h-[86px] absolute z-20 items-center flex">
+    template:
+        `<div class="w-full h-[86px] absolute z-20 items-center flex">
      <div class="grid flex-row w-[90%] my-0 mx-auto nav-grid">
 
         <timer></timer>
 
         <game></game>
 
-        <div id="toggler-main" class="items-center justify-end flex">
             <nav></nav>
-        </div>
      </div>
     </div>`
 })
