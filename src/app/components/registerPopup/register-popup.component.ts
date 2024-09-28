@@ -2,11 +2,12 @@ import { Component } from "@angular/core";
 import { PopupLogic } from "../../shared/popup-logic.service";
 import { AuthService } from "../../service/auth.service";
 import {FormsModule} from '@angular/forms'
+import { HttpClientModule } from "@angular/common/http";
 
 @Component({
     selector: 'register-popup',
     standalone: true,
-    imports: [FormsModule],
+    imports: [FormsModule, HttpClientModule],
     templateUrl: './register-popup.component.html',
     styleUrl: '../../../styles.css'
 })
