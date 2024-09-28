@@ -33,7 +33,7 @@
                     <p class="flex text-sm font-thin my-px ml-4 text-transparent select-none opacity-95 tracking-wide">
                         Password needs to be at least 8 characters.</p>
                     <button type="submit"
-                        class="w-80 mt-10 self-start h-[52px] font-bold border-none rounded-full text-base cursor-pointer bg-slate-200 text-[#182f3d] hover:bg-slate-300 transition-colors duration-500">Sign
+                        class="w-80 mt-10 self-start h-[52px] font-bold border-none rounded-full text-base cursor-pointer bg-slate-200 text-[#182f3d] hover:bg-slate-300 transition-colors duration-500" [disabled]="!registerForm.valid">Sign
                         up</button>
                 </form>
             </div>
