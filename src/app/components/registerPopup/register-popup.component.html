@@ -2,8 +2,8 @@
     <div
         class="noto flex fixed w-full h-screen top-0 left-0 justify-center items-center z-30 transition-opacity-transform duration-1000 ease-in-out transform">
         <div class="p-0 m-0 rounded-2xl relative w-[500px] h-[500px] items-center flex-col flex bg-[#142733]">
-            <svg (click)="pLogic.registerBack()" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
-                fill="white" version="1.1"
+            <svg (click)="pLogic.registerBack()" xmlns="http://www.w3.org/2000/svg"
+                xmlnsXlink="http://www.w3.org/1999/xlink" fill="white" version="1.1"
                 class="p-2.5 rotate-180 fill-zinc-400 h-11 w-11 flex cursor-pointer absolute left-0 top-0 ml-3 mt-3 rounded-full hover:fill-[#ffffff99] hover:bg-[#182f3d] transition-colors duration-500"
                 viewBox="0 0 330 330" xmlSpace="preserve">
                 <path stroke="#182f3d" strokeWidth="1"
@@ -19,25 +19,20 @@
 
             <div class="flex flex-col text-center mt-16 mx-auto">
                 <p class="inter-regular text-2xl mb-4 text-zinc-300">Sign up to see Game History</p>
-                <form action="/register" method="POST">
-                    <input id="register-email-input" type="email" maxLength={50} name="email" placeholder="Email"
+                <form (ngSubmit)="registerUser(registerForm.value)" #registerForm="ngForm">
+                    <input type="email" name="email" placeholder="Email"
                         class="w-80 h-14 border pl-2 border-gray-700 focus:outline focus:outline-gray-500 focus:outline-2 rounded appearance-none text-base bg-transparent text-white z-10" />
                     <p class="flex text-sm font-thin my-px ml-4 text-transparent select-none opacity-95 tracking-wide">
                         Please enter a valid email.</p>
-
-                    <input type="text" maxLength={50} name="username" placeholder="Username"
+                    <input type="text" name="username" placeholder="Username"
                         class="w-80 h-14 border pl-2 border-gray-700 focus:outline focus:outline-gray-500 focus:outline-2 rounded appearance-none text-base bg-transparent text-white z-10" />
-
                     <p class="flex text-sm font-thin my-px ml-4 text-transparent select-none opacity-95 tracking-wide">
                         Username needs to be minimum 5 letters.</p>
-
-                    <input maxLength={50} type="password" name="password" placeholder="Password"
+                    <input type="password" name="password" placeholder="Password"
                         class="w-80 h-14 border pl-2 border-gray-700 rounded appearance-none focus:outline focus:outline-gray-500 focus:outline-2 text-base bg-transparent text-white z-10" />
-
                     <p class="flex text-sm font-thin my-px ml-4 text-transparent select-none opacity-95 tracking-wide">
                         Password needs to be at least 8 characters.</p>
-
-                    <button
+                    <button type="submit"
                         class="w-80 mt-10 self-start h-[52px] font-bold border-none rounded-full text-base cursor-pointer bg-slate-200 text-[#182f3d] hover:bg-slate-300 transition-colors duration-500">Sign
                         up</button>
                 </form>

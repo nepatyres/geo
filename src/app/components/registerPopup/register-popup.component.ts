@@ -1,5 +1,6 @@
-import { Component} from "@angular/core";
+import { Component } from "@angular/core";
 import { PopupLogic } from "../../shared/popup-logic.service";
+import { AuthService } from "../../service/auth.service";
 
 @Component({
     selector: 'register-popup',
@@ -10,5 +11,16 @@ import { PopupLogic } from "../../shared/popup-logic.service";
 })
 
 export class RegisterPopupComponent {
-    constructor(public pLogic: PopupLogic) { }
+    constructor(public pLogic: PopupLogic, private authService: AuthService) { }
+
+    registerUser(formData: any) {
+        this.authService.registerUser(formData).subscribe(
+            (response) => {
+                console.log('User registered', response);
+            },
+            (error) => {
+                console.log('Error registering user', error);
+            }
+        )
+    }
 }
