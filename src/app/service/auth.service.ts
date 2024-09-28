@@ -8,11 +8,9 @@ import { Observable } from 'rxjs';
 })
 
 export class AuthService{
-    private apiUrl = `${environment.apiUrl}/register`;
-
     constructor(private http: HttpClient){}
 
     registerUser(userData: any): Observable<any>{
-        return this.http.post(this.apiUrl, userData)
+        return this.http.post(`${environment.apiUrl}/register`, userData)
     }
 }
