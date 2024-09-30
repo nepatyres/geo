@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://geo-backend.vercel.app/api'
+    apiUrl: 'https://geoquiz-436820.lm.r.appspot.com/api'
 }

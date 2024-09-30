@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'https://geo-backend.vercel.app/api/register';
+  private apiUrl = 'https://geoquiz-436820.lm.r.appspot.com/api/register';
 
   constructor(private http: HttpClient) {}
 
