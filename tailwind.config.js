@@ -10,7 +10,10 @@ module.exports = {
         'raleway': ['"Raleway"'],
         'noto': ['"Noto"'],
         'playfair': ['"Playfair"'],
-      }
+      },
+      colors: {
+        'red7': 'rgba(255,0,0, .7)',
+      },
     },
   },
   plugins: [],

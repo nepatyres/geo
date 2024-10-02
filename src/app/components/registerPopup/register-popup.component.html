@@ -20,21 +20,16 @@
             <div class="flex flex-col text-center mt-16 mx-auto">
                 <p class="inter-regular text-2xl mb-4 text-zinc-300">Sign up to see Game History</p>
                 <form (ngSubmit)="registerUser(registerForm.value)" #registerForm="ngForm">
-                    <input type="email" name="email" placeholder="Email"
-                        class="w-80 h-14 border pl-2 border-gray-700 focus:outline focus:outline-gray-500 focus:outline-2 rounded appearance-none text-base bg-transparent text-white z-10" />
-                    <p class="flex text-sm font-thin my-px ml-4 text-transparent select-none opacity-95 tracking-wide">
-                        Please enter a valid email.</p>
-                    <input type="text" name="username" placeholder="Username"
-                        class="w-80 h-14 border pl-2 border-gray-700 focus:outline focus:outline-gray-500 focus:outline-2 rounded appearance-none text-base bg-transparent text-white z-10" />
-                    <p class="flex text-sm font-thin my-px ml-4 text-transparent select-none opacity-95 tracking-wide">
-                        Username needs to be minimum 5 letters.</p>
-                    <input type="password" name="password" placeholder="Password"
-                        class="w-80 h-14 border pl-2 border-gray-700 rounded appearance-none focus:outline focus:outline-gray-500 focus:outline-2 text-base bg-transparent text-white z-10" />
-                    <p class="flex text-sm font-thin my-px ml-4 text-transparent select-none opacity-95 tracking-wide">
-                        Password needs to be at least 8 characters.</p>
-                    <button type="submit"
-                        class="w-80 mt-10 self-start h-[52px] font-bold border-none rounded-full text-base cursor-pointer bg-slate-200 text-[#182f3d] hover:bg-slate-300 transition-colors duration-500" [disabled]="!registerForm.valid">Sign
+                    <input type="email" name="email" placeholder="Email" ngModel
+                        class="w-80 h-14 border mb-4 pl-2 border-gray-700 focus:outline focus:outline-gray-500 focus:outline-2 rounded appearance-none text-base bg-transparent text-white z-10" />
+                    <input type="text" name="username" placeholder="Username" ngModel
+                        class="w-80 h-14 border mb-4 pl-2 border-gray-700 focus:outline focus:outline-gray-500 focus:outline-2 rounded appearance-none text-base bg-transparent text-white z-10" />
+                    <input type="password" name="password" placeholder="Password" ngModel
+                        class="w-80 h-14 border mb-4 pl-2 border-gray-700 rounded appearance-none focus:outline focus:outline-gray-500 focus:outline-2 text-base bg-transparent text-white z-10" />
+                    <button type="submit" [disabled]="!registerForm.valid"
+                        class="w-80 mt-10 self-start h-[52px] font-bold border-none rounded-full text-base cursor-pointer bg-slate-200 text-[#182f3d] hover:bg-slate-300 transition-colors duration-500">Sign
                         up</button>
+                    <p #warning class="text-sm mt-3 text-red7 select-none opacity-0"></p>
                 </form>
             </div>
         </div>

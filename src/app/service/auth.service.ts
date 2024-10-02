@@ -5,11 +5,16 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'https://geoquiz-436820.lm.r.appspot.com/api/register';
+  private registerUrl = 'http://localhost:8080/api/register';
+  private loginUrl = 'http://localhost:8080/api/login';
 
   constructor(private http: HttpClient) {}
 
   registerUser(data: any) {
-    return this.http.post(this.apiUrl, data, {withCredentials: true});
+    return this.http.post(this.registerUrl, data, {withCredentials: true});
+  }
+
+  loginUser(data:any){
+    return this.http.post(this.loginUrl, data, {withCredentials: true});
   }
 }

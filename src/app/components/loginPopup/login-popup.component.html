@@ -10,21 +10,18 @@
             </svg>
             <div class="justify-center items-center text-center flex flex-col mt-16">
                 <p class="inter-regular text-2xl mb-4 text-zinc-300">Login to see Game History</p>
-                <form action="/login" method="POST">
-                    <input
-                        class="w-80 h-14 border pl-2 border-gray-700 focus:outline focus:outline-gray-500 focus:outline-2 rounded appearance-none text-base bg-transparent text-white z-10 mb-3"
-                        type="text" maxLength={50} name="username" placeholder="Username" />
-                    <input
-                        class="w-80 h-14 border pl-2 border-gray-700 rounded appearance-none focus:outline focus:outline-gray-500 focus:outline-2 text-base bg-transparent text-white z-10 mt-2.5"
-                        maxLength={50} type="password" name="password" placeholder="Password" />
-                    <button
+                <form (ngSubmit)="loginUser(loginForm.value)" #loginForm="ngForm">
+                    <input type="text" name="username" placeholder="Username" ngModel required
+                        class="w-80 h-14 border pl-2 border-gray-700 focus:outline focus:outline-gray-500 focus:outline-2 rounded appearance-none text-base bg-transparent text-white z-10 mb-3" />
+                    <input type="password" name="password" placeholder="Password" ngModel required
+                        class="w-80 h-14 border pl-2 border-gray-700 rounded appearance-none focus:outline focus:outline-gray-500 focus:outline-2 text-base bg-transparent text-white z-10 mt-2.5" />
+                    <button type="submit"
                         class="w-80 mt-24 h-[52px] font-bold border-none rounded-full text-base cursor-pointer bg-slate-200 text-[#182f3d] hover:bg-slate-300 transition-colors duration-500">Login</button>
                 </form>
-                <p class="hidden absolute text-[red]">The username or password you entered is
-                    incorrect.</p>
+                <p #warning class="absolute text-red7 opacity-0 mt-5 text-sm">{{errorMessage}}</p>
                 <p (click)="pLogic.registerBtn()" class="text-[#71767b] text-md w-80 text-start font-thin mt-5">Don't
                     have an account?
-                    <button #signupBtn class="text-sky-700">Sign up</button>
+                    <button class="text-sky-700" >Sign up</button>
                 </p>
             </div>
         </div>
