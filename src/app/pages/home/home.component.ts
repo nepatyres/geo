@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavComponent } from '../../components/nav/nav.component';
+import { PopupLogic } from '../../shared/popup-logic.service';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -8,5 +9,5 @@ import { NavComponent } from '../../components/nav/nav.component';
   styleUrls: ['../../../styles.css']
 })
 export class HomeComponent {
-  title = 'geoquiz';
+  constructor(public pLogic: PopupLogic){}
 }

@@ -10,4 +10,8 @@ import { NavComponent } from "../../components/nav/nav.component";
 
 export class ProfileComponent{
 
+
+    backBtn(){
+        window.history.back();
+    }
 }

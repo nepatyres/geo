@@ -24,7 +24,8 @@ export class LoginPopupComponent {
         this.authService.loginUser(formData).subscribe(
             (response: any) => {
                 localStorage.setItem('jwt', response.token);
-                this.router.navigate(['/profile'])
+                this.pLogic.loginClose;
+                this.router.navigate(['/profile']);
             },
             (error) => {
                 this.errorMessage = 'The username or password you entered is incorrect';

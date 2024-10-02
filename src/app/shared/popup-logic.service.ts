@@ -5,20 +5,20 @@ import { Injectable } from '@angular/core';
 })
 
 export class PopupLogic {
-  toggler: boolean = false
-  login: boolean = false
-  register: boolean = false
+  toggler: boolean = false;
+  login: boolean = false;
+  register: boolean = false;
 
   loginBtn(): void {
-    this.login = true
+    this.login = true;
   }
 
   loginClose(): void {
-    this.login = false
+    this.login = false;
   }
 
   registerBtn(): void {
-    this.register = true
+    this.register = true;
   }
 
   registerBack(): void {
@@ -31,10 +31,10 @@ export class PopupLogic {
   }
 
   togglerBtn(): void {
-    this.toggler = true
+    this.toggler = true;
   }
 
   togglerClose(): void {
-    this.toggler = false
+    this.toggler = false;
   }
 }
