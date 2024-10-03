@@ -6,11 +6,12 @@ import { AsiaComponent } from './pages/asia/asia.component';
 import { AmericasComponent } from './pages/americas/americas.component';
 import { EuropeComponent } from './pages/europe/europe.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { AuthGuard } from './service/auth-guard.service';
 
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
-    { path: 'profile', component: ProfileComponent },
+    { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
     { path: 'africa', component: AfricaComponent },
     { path: 'world', component: WorldComponent },
     { path: 'asia', component: AsiaComponent },

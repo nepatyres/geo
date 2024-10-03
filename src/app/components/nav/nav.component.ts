@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LoginPopupComponent } from '../loginPopup/login-popup.component';
 import { PopupLogic } from '../../shared/popup-logic.service';
 import { continents } from '../../constants/countries';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
     selector: 'nav',
@@ -14,5 +15,5 @@ import { continents } from '../../constants/countries';
 
 export class NavComponent {
     continents = continents
-    constructor(public pLogic: PopupLogic) { }
+    constructor(public pLogic: PopupLogic, public authService: AuthService) { }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavComponent } from '../../components/nav/nav.component';
 import { PopupLogic } from '../../shared/popup-logic.service';
+import { AuthService } from '../../service/auth.service';
 @Component({
   selector: 'app-home',
   standalone: true,

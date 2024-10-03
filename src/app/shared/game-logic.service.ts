@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { Africa, Americas, Asia, Europe, World } from '../constants/countries';
 import { TimerLogic } from './timer-logic.service';
 import { ScoreLogic } from './score-logic.service';
+import { AuthService } from '../service/auth.service';
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class GameLogic {
-    constructor(public tLogic: TimerLogic, public sLogic: ScoreLogic) { }
+    constructor(public tLogic: TimerLogic, public sLogic: ScoreLogic, public authService: AuthService) { }
     game: boolean = true
     statsPopup = false
     gameStarted: boolean = false
@@ -48,7 +49,7 @@ export class GameLogic {
             if (clickedCountry === this.countryName) {
                 country.style.fill = 'rgba(20,39,51,0.8)'
                 tspanElement?.classList.remove('hidden')
-                if(this.countriesCount){
+                if (this.countriesCount) {
                     setTimeout(() => {
                         tspanElement?.classList.add('hidden')
                     }, 1000)
@@ -91,7 +92,7 @@ export class GameLogic {
             this.countriesCount--
             this.countryName = this.continent[this.random()]
             this.displayCountryName = this.countryName.replace(/-/g, ' ')
-            
+
         } else {
             this.gameEnd()
         }
@@ -106,6 +107,22 @@ export class GameLogic {
             for (let i = 0; i <= this.countriesCountAtStart; i++) {
                 const tspanElement = document.getElementById(`${this.continentAtStart[i]}-tspan`)
                 tspanElement?.classList.remove('hidden')
+            }
+            if (this.authService.isLoggedIn()) {
+                const gameStats = {
+                    continent: this.continent,
+                    score: this.score,
+                    attempts: this.attempts,
+                    time: this.tLogic.getTime()
+                };
+                this.authService.gameStats(gameStats).subscribe(
+                    response => {
+                        console.log('game stats saved successfully', response);
+                    },
+                    error => {
+                        console.log('error saving games stats', error)
+                    }
+                )
             }
         }
     }

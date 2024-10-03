@@ -17,26 +17,27 @@ import { FormsModule } from "@angular/forms";
 export class LoginPopupComponent {
     errorMessage: string = '';
     @ViewChild('warning', { static: true }) warning!: ElementRef;
-    private intervalId: any;
+
     constructor(public pLogic: PopupLogic, private authService: AuthService, private router: Router) { }
 
-    loginUser(formData: any) {
-        this.authService.loginUser(formData).subscribe(
-            (response: any) => {
-                localStorage.setItem('jwt', response.token);
-                this.pLogic.loginClose;
+    loginUser(formData: any): void {
+        this.authService.loginUser(formData).subscribe({
+            next: () => {
+                this.pLogic.loginClose();
                 this.router.navigate(['/profile']);
             },
-            (error) => {
+            error: (error) => {
                 this.errorMessage = 'The username or password you entered is incorrect';
                 this.loginWarning(this.errorMessage);
                 console.log('Error during login:', error);
             }
-        )
+        })
     };
 
-    loginWarning(warning: any) {
-        this.warning.nativeElement.innerText = warning
-        this.warning.nativeElement.style.opacity = 1
+    loginWarning(warning: string): void {
+        if (this.warning && this.warning.nativeElement) {
+            this.warning.nativeElement.innerText = warning;
+            this.warning.nativeElement.style.opacity = 1;
+        }
     }
 }
