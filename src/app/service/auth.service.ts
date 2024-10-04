@@ -5,12 +5,13 @@ import { PopupLogic } from '../shared/popup-logic.service';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  public apiUrl = 'http://localhost:8080/api';
+  public apiUrl = environment.apiUrl;
   private currentUserSubject: BehaviorSubject<string | null>;
   public currentUser: Observable<string | null>;
   private isAuthenticatedSubject: BehaviorSubject<boolean>;
