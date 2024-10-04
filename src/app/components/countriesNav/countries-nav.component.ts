@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from "@angular/core";
+import { Component} from "@angular/core";
 import { NavComponent } from "../../components/nav/nav.component";
 import { CommonModule } from "@angular/common";
 import { TimerComponent } from "./timer.component";

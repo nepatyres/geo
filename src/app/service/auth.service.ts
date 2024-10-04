@@ -9,18 +9,14 @@ import { isPlatformBrowser } from '@angular/common';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080/api';
-  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
-  private platformId = inject(PLATFORM_ID);
+  public apiUrl = 'http://localhost:8080/api';
+  public isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
+  public platformId = inject(PLATFORM_ID);
 
   constructor(private http: HttpClient, private router: Router, private pLogic: PopupLogic) {
     if (isPlatformBrowser(this.platformId)) {
       this.isAuthenticatedSubject.next(!!localStorage.getItem('token'));
     }
-  }
-
-  registerUser(data: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, data, { withCredentials: true });
   }
 
   loginUser(data: any): Observable<any> {
@@ -33,7 +29,7 @@ export class AuthService {
     );
   }
 
-  private setAuthenticated(token: string): void {
+ public setAuthenticated(token: string): void {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem('token', token);
     }
@@ -60,21 +56,24 @@ export class AuthService {
     }
   }
 
-  gameStats(data: any): Observable<any> {
-    const headers = this.getAuthHeaders();
-    return this.http.post(`${this.apiUrl}/gamestats`, { headers, withCredentials: true });
+  CheckAuthStatus(): void {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.validateToken(token).subscribe(
+        isValid => {
+          this.isAuthenticatedSubject.next(isValid);
+        },
+        error => {
+          console.error('Error validating token:', error);
+          this.logout();
+        }
+      );
+    } else {
+      this.isAuthenticatedSubject.next(false);
+    }
   }
 
-  getGameStats(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/gamestats`, { headers: this.getAuthHeaders(), withCredentials: true });
-  }
-
-  private getAuthHeaders(): HttpHeaders{
-    const token = this.getToken()
-    return new HttpHeaders().set('Authorization', `Bearer ${token}`);
-  }
-
-  private getToken(): string | null {
-    return isPlatformBrowser(this.platformId) ? localStorage.getItem('token') : null;
+  validateToken(token: string): Observable<boolean> {
+    return this.http.post<boolean>(`${this.apiUrl}/validate-token`, { token });
   }
 }

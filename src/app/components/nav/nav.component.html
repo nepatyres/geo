@@ -1,5 +1,5 @@
 <div class="flex flex-row absolute top-[21px] right-[27px] z-20">
-    <button (click)="authService.handleBtnClick()"
+    <button *ngIf="loginBtn" (click)="authService.handleBtnClick()"
         class="flex justify-center h-[45px] w-[45px] bg-transparent rounded cursor-pointer transition-opacity-transform duration-1000 ease-in-out transform">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
             viewBox="0 0 256 256" xml:space="preserve"
@@ -45,12 +45,12 @@
         </button>
         <ul class="con-column text-[80px] text-center opacity-0 pl-0 font-playfair">
             <li *ngFor="let continent of continents" class="list-none gap-[120px]">
-              <a class="no-underline text-white text-thin transition-colors duration-1000 ease-in-out hover:text-gray-300"
-                 aria-current="page" [attr.href]="'/' + continent.toLowerCase()">
-                 {{ continent }}
-              </a>
+                <a class="no-underline text-white text-thin transition-colors duration-1000 ease-in-out hover:text-gray-300"
+                    aria-current="page" [attr.href]="'/' + continent.toLowerCase()">
+                    {{ continent }}
+                </a>
             </li>
-          </ul>
-          
+        </ul>
+
     </div>
 </div>

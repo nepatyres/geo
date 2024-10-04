@@ -4,6 +4,7 @@ import { AuthService } from "../../service/auth.service";
 import { FormsModule } from '@angular/forms'
 import { HttpClientModule } from "@angular/common/http";
 import { Router } from "@angular/router";
+import { RegisterService } from "../../service/register.service";
 
 @Component({
     selector: 'register-popup',
@@ -16,18 +17,19 @@ import { Router } from "@angular/router";
 export class RegisterPopupComponent {
     @ViewChild('warning', { static: true }) warning!: ElementRef;
     validationErrors: { [key: string]: string } = {};
-    
-    constructor(public pLogic: PopupLogic, private authService: AuthService, private router: Router) { }
+
+    constructor(public pLogic: PopupLogic, private rService: RegisterService, private router: Router) { }
 
     registerUser(formData: any) {
         this.clearErrors();
-        this.authService.registerUser(formData).subscribe(
+        this.rService.registerUser(formData).subscribe(
             (response) => {
-                console.log('User registered', response);
-                this.router.navigate(['/profile'])
+                if (response && response.token) {
+                    this.pLogic.registerClose();
+                    this.router.navigate(['/profile']);
+                }
             },
             (error) => {
-                console.log('Error registering user', error);
                 if (error.status === 400) {
                     if (typeof error.error === 'string') {
                         this.parseAndSetErrors(error.error);

@@ -8,11 +8,11 @@ export class PopupLogic {
   toggler: boolean = false;
   login: boolean = false;
   register: boolean = false;
+  loginDisplay: boolean = true;
 
   loginBtn(): void {
     this.login = true;
   }
-
   loginClose(): void {
     this.login = false;
   }

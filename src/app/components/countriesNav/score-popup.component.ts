@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from "@angular/core";
+import { Component} from "@angular/core";
 import { ScoreLogic } from "../../shared/score-logic.service";
 
 @Component({

@@ -14,7 +14,6 @@ export class ScoreLogic {
     scoreDisplay: boolean = false
     
     scorePopup(countriesCount: any, score: any, attempts: any) {
-        console.log(countriesCount, score, attempts)
             this.quizTitle = attempts < countriesCount / 5 && score === countriesCount ? 'Excellent!🥳' : 'You can do better!🤬'
             this.quizScore = `${score}/${countriesCount}`
             this.quizAttempts = attempts

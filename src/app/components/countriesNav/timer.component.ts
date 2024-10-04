@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { Component} from '@angular/core';
 import { TimerLogic } from '../../shared/timer-logic.service';
 
 @Component({

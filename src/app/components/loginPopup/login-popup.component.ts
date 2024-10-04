@@ -29,7 +29,6 @@ export class LoginPopupComponent {
             error: (error) => {
                 this.errorMessage = 'The username or password you entered is incorrect';
                 this.loginWarning(this.errorMessage);
-                console.log('Error during login:', error);
             }
         })
     };
