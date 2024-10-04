@@ -4,6 +4,7 @@ import { AuthService } from "../../service/auth.service";
 import { Router } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { GameStatsService } from "../../service/game-stats.service";
+import { Subscription } from "rxjs";
 
 @Component({
     selector: 'app-profile',
@@ -15,15 +16,23 @@ import { GameStatsService } from "../../service/game-stats.service";
 export class ProfileComponent implements OnInit {
     games: boolean = false;
     gameStats: any;
+    private authSubscription: Subscription = new Subscription();
     constructor(public authService: AuthService, private router: Router, private gSService: GameStatsService) { }
 
-    ngOnInit(){
-        this.authService.isLoggedIn().subscribe(isLoggedIn => {
-            if(!isLoggedIn) {
+    ngOnInit() {
+        this.authSubscription = this.authService.isAuthenticated.subscribe(isAuthenticated => {
+            if (!isAuthenticated) {
                 this.router.navigate(['/']);
+            } else {
+                this.fetchGameStats();
             }
         });
-        this.fetchGameStats();
+    }
+
+    ngOnDestroy() {
+        if (this.authSubscription) {
+            this.authSubscription.unsubscribe();
+        }
     }
 
     fetchGameStats(): void{

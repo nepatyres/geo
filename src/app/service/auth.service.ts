@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
 import { PopupLogic } from '../shared/popup-logic.service';
@@ -11,24 +11,35 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AuthService {
   public apiUrl = 'http://localhost:8080/api';
-  public isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
-  public platformId = inject(PLATFORM_ID);
+  private currentUserSubject: BehaviorSubject<string | null>;
+  public currentUser: Observable<string | null>;
+  private isAuthenticatedSubject: BehaviorSubject<boolean>;
+  public isAuthenticated: Observable<boolean>;
   private jwtHelper = new JwtHelperService();
+  private platformId = inject(PLATFORM_ID);
 
-  constructor(private http: HttpClient, private router: Router, private pLogic: PopupLogic) {
-    if (isPlatformBrowser(this.platformId)) {
-      this.isAuthenticatedSubject.next(!!localStorage.getItem('token'));
-    }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private pLogic: PopupLogic
+  ) {
+    this.currentUserSubject = new BehaviorSubject<string | null>(this.getUsername());
+    this.currentUser = this.currentUserSubject.asObservable();
+    this.isAuthenticatedSubject = new BehaviorSubject<boolean>(this.isTokenValid());
+    this.isAuthenticated = this.isAuthenticatedSubject.asObservable();
   }
 
-  loginUser(data: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, data, { withCredentials: true }).pipe(
-      tap((response: any) => {
-        if (response && response.token) {
-          this.setAuthenticated(response.token);
+  public get currentUserValue(): string | null {
+    return this.currentUserSubject.value;
+  }
+
+  login(username: string, password: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/login`, { username, password })
+      .pipe(tap(user => {
+        if (user && user.token) {
+          this.setAuthenticated(user.token);
         }
-      })
-    );
+      }));
   }
 
   public setAuthenticated(token: string): void {
@@ -36,25 +47,40 @@ export class AuthService {
       localStorage.setItem('token', token);
       const decodedToken = this.jwtHelper.decodeToken(token);
       localStorage.setItem('username', decodedToken.sub);
+      this.currentUserSubject.next(decodedToken.sub);
     }
-    this.isAuthenticatedSubject.next(true)
+    this.isAuthenticatedSubject.next(true);
+  }
+
+  logout() {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('username');
+    }
+    this.currentUserSubject.next(null);
+    this.isAuthenticatedSubject.next(false);
+    this.router.navigate(['/']);
   }
 
   getUsername(): string | null {
     return isPlatformBrowser(this.platformId) ? localStorage.getItem('username') : null;
   }
 
-  logout(): void {
+  isTokenValid(): boolean {
     if (isPlatformBrowser(this.platformId)) {
-      localStorage.removeItem('token');
-      localStorage.removeItem('username');
+      const token = localStorage.getItem('token');
+      return token != null && !this.jwtHelper.isTokenExpired(token);
     }
-    this.isAuthenticatedSubject.next(false);
-    this.router.navigate(['/']);
+    return false;
   }
 
-  isLoggedIn(): Observable<boolean> {
-    return this.isAuthenticatedSubject.asObservable();
+  getToken(): string | null {
+    return this.isTokenValid() ? localStorage.getItem('token') : null;
+  }
+
+  isUserAuthenticated(): boolean {
+    const token = localStorage.getItem('token');
+    return !this.jwtHelper.isTokenExpired(token);
   }
 
   handleBtnClick(): void {
@@ -64,14 +90,4 @@ export class AuthService {
       this.pLogic.loginBtn();
     }
   }
-
-  isTokenValid(): boolean {
-    const token = localStorage.getItem('token');
-    return token != null && !this.jwtHelper.isTokenExpired(token);
-  }
-
-  getToken(): string | null {
-    return this.isTokenValid() ? localStorage.getItem('token') : null;
-  }
-
 }

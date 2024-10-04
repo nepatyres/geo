@@ -112,31 +112,27 @@ export class GameLogic {
                 const tspanElement = document.getElementById(`${this.continentAtStart[i]}-tspan`);
                 tspanElement?.classList.remove('hidden');
             }
-            this.authService.isLoggedIn().subscribe(isLoggedIn => {
-                if (isLoggedIn && this.authService.isTokenValid()) {
-                  const username = this.authService.getUsername();
-                  if (username) {
-                    const gameStats = {
-                      username: username,
-                      continent: this.con,
-                      score: this.score,
-                      attempts: this.attempts,
-                      time: this.tLogic.getTime()
-                    };
-                    this.gService.gameStats(gameStats).subscribe(
-                      response => console.log('Game stats saved successfully', response),
-                      error => {
-                        console.error('Error saving game stats', error);
-                        if (error.status === 401) {
-                          this.authService.logout();
-                        }
+            if (this.authService.isUserAuthenticated()) {
+                const username = this.authService.currentUserValue;
+                if (username) {
+                  const gameStats = {
+                    username: username,
+                    continent: this.con,
+                    score: this.score,
+                    attempts: this.attempts,
+                    time: this.tLogic.getTime()
+                  };
+                  this.gService.gameStats(gameStats).subscribe(
+                    response => console.log('Game stats saved successfully', response),
+                    error => {
+                      console.error('Error saving game stats', error);
+                      if (error.status === 401) {
+                        this.authService.logout();
                       }
-                    );
-                  } else {
-                    console.error('Username not found');
-                  }
+                    }
+                  );
                 }
-              });
+              }
         }
     }
 }

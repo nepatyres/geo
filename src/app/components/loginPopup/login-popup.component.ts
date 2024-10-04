@@ -21,7 +21,7 @@ export class LoginPopupComponent {
     constructor(public pLogic: PopupLogic, private authService: AuthService, private router: Router) { }
 
     loginUser(formData: any): void {
-        this.authService.loginUser(formData).subscribe({
+        this.authService.login(formData.username, formData.password).subscribe({
             next: () => {
                 this.pLogic.loginClose();
                 this.router.navigate(['/profile']);
@@ -30,8 +30,8 @@ export class LoginPopupComponent {
                 this.errorMessage = 'The username or password you entered is incorrect';
                 this.loginWarning(this.errorMessage);
             }
-        })
-    };
+        });
+    }
 
     loginWarning(warning: string): void {
         if (this.warning && this.warning.nativeElement) {
