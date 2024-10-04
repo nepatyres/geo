@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { PopupLogic } from '../shared/popup-logic.service';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,7 @@ export class AuthService {
   public apiUrl = 'http://localhost:8080/api';
   public isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   public platformId = inject(PLATFORM_ID);
+  private jwtHelper = new JwtHelperService();
 
   constructor(private http: HttpClient, private router: Router, private pLogic: PopupLogic) {
     if (isPlatformBrowser(this.platformId)) {
@@ -29,16 +31,23 @@ export class AuthService {
     );
   }
 
- public setAuthenticated(token: string): void {
+  public setAuthenticated(token: string): void {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem('token', token);
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      localStorage.setItem('username', decodedToken.sub);
     }
     this.isAuthenticatedSubject.next(true)
+  }
+
+  getUsername(): string | null {
+    return isPlatformBrowser(this.platformId) ? localStorage.getItem('username') : null;
   }
 
   logout(): void {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.removeItem('token');
+      localStorage.removeItem('username');
     }
     this.isAuthenticatedSubject.next(false);
     this.router.navigate(['/']);
@@ -56,24 +65,13 @@ export class AuthService {
     }
   }
 
-  CheckAuthStatus(): void {
+  isTokenValid(): boolean {
     const token = localStorage.getItem('token');
-    if (token) {
-      this.validateToken(token).subscribe(
-        isValid => {
-          this.isAuthenticatedSubject.next(isValid);
-        },
-        error => {
-          console.error('Error validating token:', error);
-          this.logout();
-        }
-      );
-    } else {
-      this.isAuthenticatedSubject.next(false);
-    }
+    return token != null && !this.jwtHelper.isTokenExpired(token);
   }
 
-  validateToken(token: string): Observable<boolean> {
-    return this.http.post<boolean>(`${this.apiUrl}/validate-token`, { token });
+  getToken(): string | null {
+    return this.isTokenValid() ? localStorage.getItem('token') : null;
   }
+
 }

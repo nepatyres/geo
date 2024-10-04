@@ -21,11 +21,7 @@ export class GameStatsService {
     }
 
     private getAuthHeaders(): HttpHeaders {
-        const token = this.getToken()
-        return new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    }
-
-    private getToken(): string | null {
-        return isPlatformBrowser(this.authService.platformId) ? localStorage.getItem('token') : null;
+        const token = this.authService.getToken()
+        return token ? new HttpHeaders().set('Authorization', `Bearer ${token}`) : new HttpHeaders();
     }
 }

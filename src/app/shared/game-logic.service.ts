@@ -113,16 +113,30 @@ export class GameLogic {
                 tspanElement?.classList.remove('hidden');
             }
             this.authService.isLoggedIn().subscribe(isLoggedIn => {
-                if (isLoggedIn) {
+                if (isLoggedIn && this.authService.isTokenValid()) {
+                  const username = this.authService.getUsername();
+                  if (username) {
                     const gameStats = {
-                        continent: this.con,
-                        score: this.score,
-                        attempts: this.attempts,
-                        time: this.tLogic.getTime()
+                      username: username,
+                      continent: this.con,
+                      score: this.score,
+                      attempts: this.attempts,
+                      time: this.tLogic.getTime()
                     };
-                    this.gService.gameStats(gameStats).subscribe()
+                    this.gService.gameStats(gameStats).subscribe(
+                      response => console.log('Game stats saved successfully', response),
+                      error => {
+                        console.error('Error saving game stats', error);
+                        if (error.status === 401) {
+                          this.authService.logout();
+                        }
+                      }
+                    );
+                  } else {
+                    console.error('Username not found');
+                  }
                 }
-            })
+              });
         }
     }
 }
