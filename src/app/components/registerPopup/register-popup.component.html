@@ -29,7 +29,7 @@
                     <button type="submit" [disabled]="!registerForm.valid"
                         class="w-80 mt-10 self-start h-[52px] font-bold border-none rounded-full text-base cursor-pointer bg-slate-200 text-[#182f3d] hover:bg-slate-300 transition-colors duration-500">Sign
                         up</button>
-                    <p #warning class="text-sm mt-3 text-red7 select-none opacity-0"></p>
+                    <p #warning class="text-sm mt-3 text-red7 select-none opacity-0">{{validationErrors}}</p>
                 </form>
             </div>
         </div>
